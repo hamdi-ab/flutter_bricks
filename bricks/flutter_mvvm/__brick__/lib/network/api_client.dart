@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../core/constants/app_constants.dart';
 import '../core/utils/logger.dart';
@@ -7,7 +8,10 @@ import 'interceptors/logging_interceptor.dart';
 
 /// API client using Dio
 class ApiClient {
-  ApiClient({required String baseUrl}) {
+  ApiClient({
+    required String baseUrl,
+    required FlutterSecureStorage secureStorage,
+  }) {
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
@@ -21,7 +25,10 @@ class ApiClient {
       ),
     );
 
-    _dio.interceptors.addAll([LoggingInterceptor(), AuthInterceptor()]);
+    _dio.interceptors.addAll([
+      LoggingInterceptor(),
+      AuthInterceptor(secureStorage),
+    ]);
   }
 
   late final Dio _dio;

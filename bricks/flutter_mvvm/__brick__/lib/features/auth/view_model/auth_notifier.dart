@@ -13,7 +13,7 @@ part 'auth_notifier.g.dart';
 AuthRepository authRepository(AuthRepositoryRef ref) {
   return AuthRepositoryImpl(
     apiClient: ref.watch(apiClientProvider),
-    sharedPreferences: ref.watch(sharedPreferencesProvider),
+    secureStorage: ref.watch(secureStorageProvider),
   );
 }
 

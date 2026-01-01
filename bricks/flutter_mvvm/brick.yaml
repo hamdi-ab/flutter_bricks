@@ -36,3 +36,9 @@ vars:
     description: Include analytics setup
     default: false
     prompt: Include analytics?
+  
+  use_cached_network_image:
+    type: boolean
+    description: Include cached_network_image and AppNetworkImage widget
+    default: true
+    prompt: Do you want to use cached_network_image (AppNetworkImage)?

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../core/constants/api_endpoints.dart';
 import '../../../core/constants/app_constants.dart';
@@ -14,12 +14,12 @@ import 'auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({
     required ApiClient apiClient,
-    required SharedPreferences sharedPreferences,
+    required FlutterSecureStorage secureStorage,
   }) : _apiClient = apiClient,
-       _sharedPreferences = sharedPreferences;
+       _secureStorage = secureStorage;
 
   final ApiClient _apiClient;
-  final SharedPreferences _sharedPreferences;
+  final FlutterSecureStorage _secureStorage;
 
   @override
   Future<Result<User>> login(String email, String password) async {
@@ -32,9 +32,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final authResponse = AuthResponse.fromJson(response.data!);
 
       // Save token
-      await _sharedPreferences.setString(
-        AppConstants.authTokenKey,
-        authResponse.token,
+      await _secureStorage.write(
+        key: AppConstants.authTokenKey,
+        value: authResponse.token,
       );
 
       return Success(authResponse.user);
@@ -67,9 +67,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final authResponse = AuthResponse.fromJson(response.data!);
 
       // Save token
-      await _sharedPreferences.setString(
-        AppConstants.authTokenKey,
-        authResponse.token,
+      await _secureStorage.write(
+        key: AppConstants.authTokenKey,
+        value: authResponse.token,
       );
 
       return Success(authResponse.user);
@@ -83,7 +83,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Result<void>> logout() async {
     try {
-      await _sharedPreferences.remove(AppConstants.authTokenKey);
+      await _secureStorage.delete(key: AppConstants.authTokenKey);
       return const Success(null);
     } catch (e) {
       return Failure(CacheException(e.toString()));
@@ -93,7 +93,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Result<User?>> getCurrentUser() async {
     try {
-      final token = _sharedPreferences.getString(AppConstants.authTokenKey);
+      final token = await _secureStorage.read(key: AppConstants.authTokenKey);
 
       if (token == null) {
         return const Success(null);
