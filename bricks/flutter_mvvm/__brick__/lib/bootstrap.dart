@@ -6,11 +6,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 {{/use_firebase}}
 
+import 'config/env/env_config.dart';
 import 'config/providers/app_providers.dart';
 import 'core/utils/logger.dart';
 
 /// Bootstrap the application with async initialization
-Future<ProviderContainer> bootstrap() async {
+Future<ProviderContainer> bootstrap({Flavor flavor = Flavor.dev}) async {
+  // Get environment config
+  final envConfig = getEnvConfig(flavor);
+  
+  logger.info('Starting ${envConfig.appName} in ${flavor.name} mode');
+
   // Setup error handling
   FlutterError.onError = (details) {
     logger.error('Flutter Error', error: details.exception, stackTrace: details.stack);
@@ -35,6 +41,7 @@ Future<ProviderContainer> bootstrap() async {
   final container = ProviderContainer(
     overrides: [
       sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+      envProvider.overrideWithValue(envConfig),
     ],
   );
 

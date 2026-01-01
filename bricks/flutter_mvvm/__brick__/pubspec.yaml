@@ -48,6 +48,9 @@ dev_dependencies:
   
   # Testing
   mocktail: ^1.0.3
+  
+  # Dev Tools
+  device_preview: ^1.2.0
 
 flutter:
   uses-material-design: true

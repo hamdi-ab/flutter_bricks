@@ -1,13 +1,24 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:device_preview/device_preview.dart';
+
 import 'bootstrap.dart';
+import 'config/router/app_router.dart';
+import 'core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final container = await bootstrap();
 
-  runApp(UncontrolledProviderScope(container: container, child: const MyApp()));
+  runApp(
+    DevicePreview(
+      enabled: kDebugMode, // Only enabled in debug mode
+      builder: (context) =>
+          UncontrolledProviderScope(container: container, child: const MyApp()),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
@@ -25,6 +36,9 @@ class MyApp extends ConsumerWidget {
       themeMode: ThemeMode.system,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
+      // DevicePreview configuration
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
     );
   }
 }
