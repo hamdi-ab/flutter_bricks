@@ -1,0 +1,38 @@
+name: flutter_mvvm
+description: A production-ready Flutter MVVM boilerplate with Riverpod, Freezed, and GoRouter
+version: 1.0.0
+repository: https://github.com/yourusername/flutter_mvvm_brick
+
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
+
+vars:
+  project_name:
+    type: string
+    description: The name of your Flutter project (snake_case)
+    default: my_app
+    prompt: What is your project name?
+  
+  org_name:
+    type: string
+    description: Organization identifier (e.g., com.example)
+    default: com.example
+    prompt: What is your organization name?
+  
+  description:
+    type: string
+    description: A short description of your app
+    default: A Flutter MVVM application
+    prompt: Describe your app
+  
+  use_firebase:
+    type: boolean
+    description: Include Firebase setup
+    default: false
+    prompt: Include Firebase?
+  
+  use_analytics:
+    type: boolean
+    description: Include analytics setup
+    default: false
+    prompt: Include analytics?
