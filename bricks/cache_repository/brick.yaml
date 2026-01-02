@@ -1,6 +1,6 @@
 name: cache_repository
 description: Scaffolds a repository with in-memory caching and TTL support.
-version: 1.0.0
+version: 1.1.0
 environment:
   mason: ">=0.1.0-dev <1.0.0"
 vars:
@@ -14,3 +14,8 @@ vars:
     description: The entity name (e.g. feed_item, user)
     default: feed_item
     prompt: What is the entity name?
+  use_disk_cache:
+    type: boolean
+    description: Enable persistent disk caching using Hive
+    default: false
+    prompt: Do you want to enable disk caching (Hive)?
