@@ -1,0 +1,16 @@
+name: cache_repository
+description: Scaffolds a repository with in-memory caching and TTL support.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
+vars:
+  feature:
+    type: string
+    description: The feature name (e.g. feed, profile)
+    default: feed
+    prompt: What is the feature name?
+  entity:
+    type: string
+    description: The entity name (e.g. feed_item, user)
+    default: feed_item
+    prompt: What is the entity name?
