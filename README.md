@@ -10,6 +10,7 @@ A collection of production-ready Mason bricks for Flutter development.
 | [**cache_repository**](./bricks/cache_repository) | A repository pattern generator with in-memory and optional disk caching (Hive). | `bricks/cache_repository` |
 | [**media_picker_service**](./bricks/media_picker_service) | A reusable service for picking images/files with permission handling. | `bricks/media_picker_service` |
 | [**theme_controller**](./bricks/theme_controller) | A reusable theme management system (Light/Dark/System) with persistence. | `bricks/theme_controller` |
+| [**pagination_utils**](./bricks/pagination_utils) | A generic pagination controller and state system. | `bricks/pagination_utils` |
 
 ## 🛠️ Usage
 

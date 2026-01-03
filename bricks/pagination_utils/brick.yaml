@@ -1,0 +1,11 @@
+name: pagination_utils
+description: Scaffolds a generic, framework-agnostic pagination controller and state system.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
+vars:
+  page_size:
+    type: number
+    description: Default page size
+    default: 20
+    prompt: What is the default page size?
