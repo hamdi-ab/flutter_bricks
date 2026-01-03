@@ -11,6 +11,7 @@ A collection of production-ready Mason bricks for Flutter development.
 | [**media_picker_service**](./bricks/media_picker_service) | A reusable service for picking images/files with permission handling. | `bricks/media_picker_service` |
 | [**theme_controller**](./bricks/theme_controller) | A reusable theme management system (Light/Dark/System) with persistence. | `bricks/theme_controller` |
 | [**pagination_utils**](./bricks/pagination_utils) | A generic pagination controller and state system. | `bricks/pagination_utils` |
+| [**form_validators**](./bricks/form_validators) | generic form validators | `bricks/form_validators` |
 
 ## 🛠️ Usage
 
