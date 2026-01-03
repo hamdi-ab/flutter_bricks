@@ -8,6 +8,7 @@ A collection of production-ready Mason bricks for Flutter development.
 |-------|-------------|------|
 | [**flutter_mvvm**](./bricks/flutter_mvvm) | A complete MVVM project boilerplate with Riverpod, Freezed, GoRouter, and more. | `bricks/flutter_mvvm` |
 | [**cache_repository**](./bricks/cache_repository) | A repository pattern generator with in-memory and optional disk caching (Hive). | `bricks/cache_repository` |
+| [**media_picker_service**](./bricks/media_picker_service) | A reusable service for picking images/files with permission handling. | `bricks/media_picker_service` |
 
 ## 🛠️ Usage
 
