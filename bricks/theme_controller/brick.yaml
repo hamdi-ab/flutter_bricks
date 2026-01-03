@@ -1,0 +1,11 @@
+name: theme_controller
+description: Scaffolds a reusable theme management system (Light/Dark/System).
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
+vars:
+  default_mode:
+    type: string
+    description: Default theme mode (system, light, dark)
+    default: system
+    prompt: What should be the default theme mode?
