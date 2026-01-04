@@ -13,6 +13,7 @@ A collection of production-ready Mason bricks for Flutter development.
 | [**pagination_utils**](./bricks/pagination_utils) | A generic pagination controller and state system. | `bricks/pagination_utils` |
 | [**form_validators**](./bricks/form_validators) | generic form validators | `bricks/form_validators` |
 | [**session_management**](./bricks/session_management) | Enterprise session management with token pairs and auto-refresh | `bricks/session_management` |
+| [**network_image_widget**](./bricks/network_image_widget) | Robust cached network image with progress, retry, and animations | `bricks/network_image_widget` |
 
 ## 🛠️ Usage
 
