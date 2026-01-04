@@ -1,0 +1,5 @@
+name: session_management
+description: Enterprise-grade session management with token pairs, expiry tracking, auto-refresh, and session state streaming.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
