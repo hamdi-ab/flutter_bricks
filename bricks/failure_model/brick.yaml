@@ -1,0 +1,5 @@
+name: failure_model
+description: Unified failure/error modeling with Result type, failure hierarchy, and error mapping for consistent error handling across the entire application.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
