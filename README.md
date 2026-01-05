@@ -14,6 +14,7 @@ A collection of production-ready Mason bricks for Flutter development.
 | [**form_validators**](./bricks/form_validators) | generic form validators | `bricks/form_validators` |
 | [**session_management**](./bricks/session_management) | Enterprise session management with token pairs and auto-refresh | `bricks/session_management` |
 | [**network_image_widget**](./bricks/network_image_widget) | Robust cached network image with progress, retry, and animations | `bricks/network_image_widget` |
+| [**notification_service**](./bricks/notification_service) | Enterprise notification service with FCM, local, and routing | `bricks/notification_service` |
 
 ## 🛠️ Usage
 

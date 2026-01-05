@@ -1,0 +1,5 @@
+name: notification_service
+description: Enterprise-grade notification service with local notifications, FCM push handling, permissions, and navigation routing.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
