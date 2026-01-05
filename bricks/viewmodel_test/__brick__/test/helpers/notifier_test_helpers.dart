@@ -7,21 +7,21 @@ import 'test_container.dart';
 ///
 /// Usage:
 /// ```dart
-/// testNotifier<AuthNotifier, User?>(
+/// testAsyncNotifier<User?>(
 ///   'login success updates state',
 ///   provider: authNotifierProvider,
 ///   overrides: [
 ///     authRepositoryProvider.overrideWith((ref) => MockAuthRepository()),
 ///   ],
-///   act: (notifier) => notifier.login('test@test.com', 'password'),
+///   act: (container) => container.read(authNotifierProvider.notifier).login('test@test.com', 'password'),
 ///   expect: (state) => expect(state, isAsyncData<User?>()),
 /// );
 /// ```
-void testNotifier<N extends AsyncNotifier<T>, T>(
+void testAsyncNotifier<T>(
   String description, {
-  required AutoDisposeAsyncNotifierProvider<N, T> provider,
+  required AsyncNotifierProvider<AsyncNotifier<T>, T> provider,
   List<Override> overrides = const [],
-  Future<void> Function(N notifier)? act,
+  Future<void> Function(ProviderContainer container)? act,
   void Function(AsyncValue<T> state)? expect,
   void Function(ProviderContainer container)? verify,
 }) {
@@ -33,7 +33,7 @@ void testNotifier<N extends AsyncNotifier<T>, T>(
 
     // Act
     if (act != null) {
-      await act(container.read(provider.notifier));
+      await act(container);
     }
 
     // Expect
@@ -47,11 +47,11 @@ void testNotifier<N extends AsyncNotifier<T>, T>(
 }
 
 /// Helper for testing Notifier-based ViewModels (non-async)
-void testSyncNotifier<N extends Notifier<T>, T>(
+void testSyncNotifier<T>(
   String description, {
-  required AutoDisposeNotifierProvider<N, T> provider,
+  required NotifierProvider<Notifier<T>, T> provider,
   List<Override> overrides = const [],
-  void Function(N notifier)? act,
+  void Function(ProviderContainer container)? act,
   void Function(T state)? expect,
   void Function(ProviderContainer container)? verify,
 }) {
@@ -60,7 +60,7 @@ void testSyncNotifier<N extends Notifier<T>, T>(
 
     // Act
     if (act != null) {
-      act(container.read(provider.notifier));
+      act(container);
     }
 
     // Expect
@@ -79,20 +79,20 @@ void testSyncNotifier<N extends Notifier<T>, T>(
 ///
 /// Usage:
 /// ```dart
-/// await expectStateSequence<AuthNotifier, User?>(
+/// await expectStateSequence<User?>(
 ///   container: container,
 ///   provider: authNotifierProvider,
-///   act: (notifier) => notifier.login('test@test.com', 'password'),
+///   act: (container) => container.read(authNotifierProvider.notifier).login('test@test.com', 'password'),
 ///   states: [
 ///     isAsyncLoading,
 ///     isAsyncData<User?>(),
 ///   ],
 /// );
 /// ```
-Future<void> expectStateSequence<N extends AsyncNotifier<T>, T>({
+Future<void> expectStateSequence<T>({
   required ProviderContainer container,
-  required AutoDisposeAsyncNotifierProvider<N, T> provider,
-  required Future<void> Function(N notifier) act,
+  required AsyncNotifierProvider<AsyncNotifier<T>, T> provider,
+  required Future<void> Function(ProviderContainer container) act,
   required List<Matcher> states,
 }) async {
   final stateChanges = <AsyncValue<T>>[];
@@ -103,7 +103,7 @@ Future<void> expectStateSequence<N extends AsyncNotifier<T>, T>({
     fireImmediately: false,
   );
 
-  await act(container.read(provider.notifier));
+  await act(container);
 
   // Allow async updates to complete
   await Future<void>.delayed(Duration.zero);

@@ -52,7 +52,7 @@ class AppNetworkImage extends StatelessWidget {
           Container(
             width: width,
             height: height,
-            color: Theme.of(context).colorScheme.surfaceVariant,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
             child: const Center(
               child: CircularProgressIndicator(strokeWidth: 2),
             ),
@@ -61,7 +61,7 @@ class AppNetworkImage extends StatelessWidget {
     );
 
     if (borderRadius != null) {
-      image = ClipRRect(borderRadius: borderRadius, child: image);
+      image = ClipRRect(borderRadius: borderRadius!, child: image);
     }
 
     return image;
@@ -73,7 +73,7 @@ class AppNetworkImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      color: Theme.of(context).colorScheme.surfaceVariant,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
       child: Center(
         child: Icon(
           Icons.error_outline,

@@ -22,8 +22,9 @@ class AppValidators {
   /// Validates email format
   static Validator<String> email({String message = 'Invalid email address'}) {
     return (value) {
-      if (value == null || value.isEmpty)
+      if (value == null || value.isEmpty) {
         return const ValidationSuccess(); // Optional field
+      }
 
       final emailRegex = RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",

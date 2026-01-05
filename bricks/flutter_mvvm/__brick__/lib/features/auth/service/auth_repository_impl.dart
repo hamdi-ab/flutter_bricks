@@ -40,11 +40,11 @@ class AuthRepositoryImpl implements AuthRepository {
       return Success(authResponse.user);
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
-        return const Failure(AuthException('Invalid credentials'));
+        return Failure(AuthException.invalidCredentials());
       }
-      return Failure(NetworkException(e.message));
+      return Failure(NetworkException(message: e.message ?? 'Network error'));
     } catch (e) {
-      return Failure(UnknownException(e.toString()));
+      return Failure(UnknownException(message: e.toString()));
     }
   }
 
@@ -74,9 +74,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
       return Success(authResponse.user);
     } on DioException catch (e) {
-      return Failure(NetworkException(e.message));
+      return Failure(NetworkException(message: e.message ?? 'Network error'));
     } catch (e) {
-      return Failure(UnknownException(e.toString()));
+      return Failure(UnknownException(message: e.toString()));
     }
   }
 
@@ -86,7 +86,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await _secureStorage.delete(key: AppConstants.authTokenKey);
       return const Success(null);
     } catch (e) {
-      return Failure(CacheException(e.toString()));
+      return Failure(CacheException(message: e.toString()));
     }
   }
 
@@ -106,9 +106,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = User.fromJson(response.data!);
       return Success(user);
     } on DioException catch (e) {
-      return Failure(NetworkException(e.message));
+      return Failure(NetworkException(message: e.message ?? 'Network error'));
     } catch (e) {
-      return Failure(UnknownException(e.toString()));
+      return Failure(UnknownException(message: e.toString()));
     }
   }
 }
