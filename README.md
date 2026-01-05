@@ -16,6 +16,7 @@ A collection of production-ready Mason bricks for Flutter development.
 | [**network_image_widget**](./bricks/network_image_widget) | Robust cached network image with progress, retry, and animations | `bricks/network_image_widget` |
 | [**notification_service**](./bricks/notification_service) | Enterprise notification service with FCM, local, and routing | `bricks/notification_service` |
 | [**failure_model**](./bricks/failure_model) | Unified failure hierarchy, Result type, and error mapping | `bricks/failure_model` |
+| [**ui_state**](./bricks/ui_state) | Standardized UI state (Idle, Loading, Success, Error, Empty) | `bricks/ui_state` |
 
 ## 🛠️ Usage
 

@@ -1,0 +1,5 @@
+name: ui_state
+description: Standardized UI state wrapper (Idle, Loading, Success, Error, Empty) for consistent view logic across the application.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
