@@ -1,0 +1,5 @@
+name: viewmodel_test
+description: Test utilities for Riverpod ViewModels including mock helpers, test containers, and assertion utilities.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
