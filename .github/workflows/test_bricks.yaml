@@ -36,15 +36,15 @@ jobs:
         working-directory: ./bricks/flutter_mvvm/hooks
         run: dart pub get
       
-      - name: Add flutter_mvvm brick
-        run: mason add flutter_mvvm --path ./bricks/flutter_mvvm
+      - name: Add flutter_mvvm brick globally
+        run: mason add -g flutter_mvvm --path ./bricks/flutter_mvvm
       
       - name: Generate test app from brick
         run: |
           mkdir -p /tmp/ci_test
-          cd /tmp/ci_test
           mason make flutter_mvvm \
             --on-conflict overwrite \
+            --output-dir /tmp/ci_test \
             project_name=ci_test_app \
             org_name=com.example \
             description="CI Test App"
