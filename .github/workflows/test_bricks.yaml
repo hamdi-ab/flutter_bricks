@@ -44,10 +44,10 @@ jobs:
           mkdir -p /tmp/ci_test
           cd /tmp/ci_test
           mason make flutter_mvvm \
-            --project_name ci_test_app \
-            --org_name com.example \
-            --description "CI Test App" \
-            --on-conflict overwrite
+            --on-conflict overwrite \
+            project_name=ci_test_app \
+            org_name=com.example \
+            description="CI Test App"
       
       - name: Install dependencies
         working-directory: /tmp/ci_test/ci_test_app
