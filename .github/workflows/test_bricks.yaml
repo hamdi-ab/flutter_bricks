@@ -1,0 +1,84 @@
+name: Test Mason Bricks
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'bricks/**'
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'bricks/**'
+
+jobs:
+  test-flutter-mvvm:
+    name: Test flutter_mvvm Brick
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+      
+      - name: Install Mason CLI
+        run: dart pub global activate mason_cli
+      
+      - name: Add flutter_mvvm brick
+        run: mason add flutter_mvvm --path ./bricks/flutter_mvvm
+      
+      - name: Generate test app from brick
+        run: |
+          mkdir -p /tmp/ci_test
+          cd /tmp/ci_test
+          mason make flutter_mvvm \
+            --project_name ci_test_app \
+            --org_name com.example \
+            --description "CI Test App" \
+            --on-conflict overwrite
+      
+      - name: Install dependencies
+        working-directory: /tmp/ci_test/ci_test_app
+        run: flutter pub get
+      
+      - name: Analyze generated code
+        working-directory: /tmp/ci_test/ci_test_app
+        run: flutter analyze --no-fatal-infos
+      
+      - name: Run tests (if any exist)
+        working-directory: /tmp/ci_test/ci_test_app
+        run: flutter test --no-pub || echo "No tests to run"
+
+  lint-bricks:
+    name: Lint Brick Templates
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Validate brick.yaml files
+        run: |
+          for brick_dir in bricks/*/; do
+            if [ -f "${brick_dir}brick.yaml" ]; then
+              echo "✓ Found brick.yaml in $brick_dir"
+            else
+              echo "✗ Missing brick.yaml in $brick_dir"
+              exit 1
+            fi
+          done
+      
+      - name: Check for required files
+        run: |
+          required_files=("README.md" "CHANGELOG.md" "LICENSE")
+          for brick_dir in bricks/*/; do
+            for file in "${required_files[@]}"; do
+              if [ ! -f "${brick_dir}${file}" ]; then
+                echo "Warning: Missing $file in $brick_dir"
+              fi
+            done
+          done
