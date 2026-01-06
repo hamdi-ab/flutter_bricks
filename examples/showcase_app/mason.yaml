@@ -1,0 +1,25 @@
+bricks:
+  flutter_mvvm:
+    path: ../../bricks/flutter_mvvm
+  failure_model:
+    path: ../../bricks/failure_model
+  ui_state:
+    path: ../../bricks/ui_state
+  cache_repository:
+    path: ../../bricks/cache_repository
+  session_management:
+    path: ../../bricks/session_management
+  network_image_widget:
+    path: ../../bricks/network_image_widget
+  notification_service:
+    path: ../../bricks/notification_service
+  viewmodel_test:
+    path: ../../bricks/viewmodel_test
+  theme_controller:
+    path: ../../bricks/theme_controller
+  pagination_utils:
+    path: ../../bricks/pagination_utils
+  form_validators:
+    path: ../../bricks/form_validators
+  media_picker_service:
+    path: ../../bricks/media_picker_service
