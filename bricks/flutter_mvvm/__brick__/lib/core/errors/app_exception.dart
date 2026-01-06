@@ -49,14 +49,12 @@ class NetworkException extends AppException {
   factory NetworkException.timeout() => const NetworkException(
     message: 'Request timed out. Please check your connection.',
     code: 'TIMEOUT',
-    isRecoverable: true,
   );
 
   /// Factory for noConnection
   factory NetworkException.noConnection() => const NetworkException(
     message: 'No internet connection.',
     code: 'NO_CONNECTION',
-    isRecoverable: true,
   );
 
   /// Factory for server errors (5xx)
@@ -64,7 +62,6 @@ class NetworkException extends AppException {
     message: 'Server error occurred. Please try again later.',
     code: 'SERVER_ERROR',
     statusCode: statusCode,
-    isRecoverable: true,
   );
 
   /// Factory for client errors (4xx)
