@@ -41,7 +41,7 @@ jobs:
       
       - name: Generate test app from brick
         run: |
-          mkdir -p /tmp/ci_test
+          mkdir -p /tmp/ci_test/ci_test_app
           cat > /tmp/brick_config.json << 'EOF'
           {
             "project_name": "ci_test_app",
@@ -55,7 +55,7 @@ jobs:
           mason make flutter_mvvm \
             -c /tmp/brick_config.json \
             --on-conflict overwrite \
-            --output-dir /tmp/ci_test
+            --output-dir /tmp/ci_test/ci_test_app
       
       - name: Install dependencies
         working-directory: /tmp/ci_test/ci_test_app
