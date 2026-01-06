@@ -29,6 +29,9 @@ jobs:
       - name: Install Mason CLI
         run: dart pub global activate mason_cli
       
+      - name: Initialize Mason
+        run: mason init
+      
       - name: Add flutter_mvvm brick
         run: mason add flutter_mvvm --path ./bricks/flutter_mvvm
       
