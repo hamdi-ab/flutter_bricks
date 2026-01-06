@@ -31,6 +31,10 @@ jobs:
       
       - name: Initialize Mason
         run: mason init
+
+      - name: Resolve Hook Dependencies
+        working-directory: ./bricks/flutter_mvvm/hooks
+        run: dart pub get
       
       - name: Add flutter_mvvm brick
         run: mason add flutter_mvvm --path ./bricks/flutter_mvvm
