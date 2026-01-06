@@ -151,12 +151,6 @@ class ValidationException extends AppException {
     this.fieldErrors = const {},
   });
 
-  /// The field that failed validation (if single field)
-  final String? field;
-
-  /// Map of field names to error messages (for form validation)
-  final Map<String, String> fieldErrors;
-
   /// Factory for required field
   factory ValidationException.required(String field) => ValidationException(
     message: '$field is required.',
@@ -179,6 +173,12 @@ class ValidationException extends AppException {
         code: 'MULTIPLE_ERRORS',
         fieldErrors: errors,
       );
+
+  /// The field that failed validation (if single field)
+  final String? field;
+
+  /// Map of field names to error messages (for form validation)
+  final Map<String, String> fieldErrors;
 }
 
 /// Permission and access exceptions

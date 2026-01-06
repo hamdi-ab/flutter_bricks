@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../config/providers/app_providers.dart';
@@ -10,7 +9,7 @@ part 'auth_notifier.g.dart';
 
 /// Auth repository provider
 @riverpod
-AuthRepository authRepository(AuthRepositoryRef ref) {
+AuthRepository authRepository(Ref ref) {
   return AuthRepositoryImpl(
     apiClient: ref.watch(apiClientProvider),
     secureStorage: ref.watch(secureStorageProvider),

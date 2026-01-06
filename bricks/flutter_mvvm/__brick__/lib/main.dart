@@ -14,7 +14,6 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: kDebugMode, // Only enabled in debug mode
       builder: (context) =>
           UncontrolledProviderScope(container: container, child: const MyApp()),
     ),
@@ -33,7 +32,6 @@ class MyApp extends ConsumerWidget {
       title: '{{project_name.titleCase()}}',
       theme: theme.lightTheme,
       darkTheme: theme.darkTheme,
-      themeMode: ThemeMode.system,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
       // DevicePreview configuration

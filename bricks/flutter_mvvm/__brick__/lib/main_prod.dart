@@ -27,7 +27,6 @@ class MyApp extends ConsumerWidget {
       title: '{{project_name.titleCase()}}',
       theme: theme.lightTheme,
       darkTheme: theme.darkTheme,
-      themeMode: ThemeMode.system,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
     );

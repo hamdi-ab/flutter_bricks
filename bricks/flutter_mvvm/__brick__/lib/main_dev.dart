@@ -12,11 +12,10 @@ import 'core/theme/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final container = await bootstrap(flavor: Flavor.dev);
+  final container = await bootstrap();
 
   runApp(
     DevicePreview(
-      enabled: kDebugMode,
       builder: (context) =>
           UncontrolledProviderScope(container: container, child: const MyApp()),
     ),
@@ -35,7 +34,6 @@ class MyApp extends ConsumerWidget {
       title: '{{project_name.titleCase()}}',
       theme: theme.lightTheme,
       darkTheme: theme.darkTheme,
-      themeMode: ThemeMode.system,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
       locale: DevicePreview.locale(context),

@@ -4,7 +4,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../network/api_client.dart';
 import '../env/env_config.dart';
-import '../router/app_router.dart';
 
 /// Shared Preferences (for non-sensitive data)
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
