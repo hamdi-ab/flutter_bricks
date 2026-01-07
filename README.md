@@ -18,6 +18,7 @@ A collection of production-ready Mason bricks for Flutter development.
 | [**failure_model**](./bricks/failure_model) | Unified failure hierarchy, Result type, and error mapping | `bricks/failure_model` |
 | [**ui_state**](./bricks/ui_state) | Standardized UI state (Idle, Loading, Success, Error, Empty) | `bricks/ui_state` |
 | [**viewmodel_test**](./bricks/viewmodel_test) | Test utilities for Riverpod ViewModels | `bricks/viewmodel_test` |
+| [**localization_controller**](./bricks/localization_controller) | Robust localization with locale persistence and ARB translations | `bricks/localization_controller` |
 
 ## 🛠️ Usage
 
