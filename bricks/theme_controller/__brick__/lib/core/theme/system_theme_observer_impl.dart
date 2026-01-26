@@ -1,3 +1,4 @@
+{{#include_system_theme}}
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
@@ -33,3 +34,4 @@ class SystemThemeObserverImpl
     _controller.close();
   }
 }
+{{/include_system_theme}}

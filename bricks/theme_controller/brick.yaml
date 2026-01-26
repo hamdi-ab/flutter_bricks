@@ -4,6 +4,11 @@ version: 1.0.0
 environment:
   mason: ">=0.1.0-dev <1.0.0"
 vars:
+  include_system_theme:
+    type: boolean
+    description: Include system theme option (true = Light/Dark/System, false = Light/Dark toggle only)
+    default: true
+    prompt: Include system theme support?
   default_mode:
     type: string
     description: Default theme mode (system, light, dark)

@@ -5,7 +5,9 @@ enum AppThemeMode {
 
   /// Always use dark theme
   dark,
+{{#include_system_theme}}
 
   /// Follow system brightness setting
   system,
+{{/include_system_theme}}
 }

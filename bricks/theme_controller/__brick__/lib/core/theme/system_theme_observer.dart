@@ -1,3 +1,4 @@
+{{#include_system_theme}}
 /// Interface for observing system theme/brightness changes
 abstract class SystemThemeObserver {
   /// Stream of isDark brightness values
@@ -9,3 +10,4 @@ abstract class SystemThemeObserver {
   /// Dispose resources
   void dispose();
 }
+{{/include_system_theme}}
