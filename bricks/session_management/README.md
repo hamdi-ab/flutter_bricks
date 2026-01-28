@@ -5,10 +5,18 @@ Enterprise-grade session management with token pairs, automatic refresh, and ses
 ## Features
 
 - **Token Pairs**: Manage access + refresh tokens with expiry tracking
-- **Auto-Refresh**: Automatically refresh tokens before expiry
+- **Auto-Refresh** (optional): Automatically refresh tokens before expiry
+- **Configurable Refresh Buffer**: Set how early to refresh before expiry
 - **Session State Stream**: React to session changes (login, logout, expiry)
 - **Secure Storage**: Uses `flutter_secure_storage` for token persistence
 - **Dio Integration**: Interceptor for automatic token injection
+
+## Variables
+
+| Variable | Type | Default | Description |
+|----------|------|---------|-------------|
+| `enable_auto_refresh` | boolean | `true` | Enable automatic token refresh before expiry |
+| `refresh_buffer_minutes` | number | `1` | Minutes before token expiry to trigger refresh |
 
 ## Generated Files
 
@@ -112,3 +120,27 @@ await sessionController.setSession(TokenPair(
 // Logout
 await sessionController.clearSession();
 ```
+
+### 6. Manual Refresh (when auto-refresh is disabled)
+
+```dart
+// Manually trigger token refresh
+final success = await sessionController.refreshSession();
+if (!success) {
+  // Handle refresh failure
+}
+```
+
+## Configuration Examples
+
+### With Auto-Refresh (default)
+```bash
+mason make session_management --enable_auto_refresh true --refresh_buffer_minutes 2
+```
+Tokens will automatically refresh 2 minutes before expiry.
+
+### Without Auto-Refresh
+```bash
+mason make session_management --enable_auto_refresh false
+```
+Use `sessionController.refreshSession()` to manually refresh when needed.

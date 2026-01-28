@@ -9,7 +9,9 @@ import 'token_storage.dart';
 ///
 /// Handles:
 /// - Token persistence and retrieval
+{{#enable_auto_refresh}}
 /// - Automatic token refresh before expiry
+{{/enable_auto_refresh}}
 /// - Session state broadcasting
 /// - Logout and session clearing
 class SessionController {
@@ -24,7 +26,12 @@ class SessionController {
 
   final _stateController = StreamController<SessionState>.broadcast();
   SessionState _currentState = const SessionUnauthenticated();
+{{#enable_auto_refresh}}
   Timer? _refreshTimer;
+
+  /// Buffer time before expiry to trigger refresh
+  static const _refreshBuffer = Duration(minutes: {{refresh_buffer_minutes}});
+{{/enable_auto_refresh}}
 
   /// Stream of session state changes
   Stream<SessionState> get sessionState => _stateController.stream;
@@ -53,7 +60,9 @@ class SessionController {
       await _refreshSession(storedTokens);
     } else {
       _updateState(SessionAuthenticated(tokenPair: storedTokens));
+{{#enable_auto_refresh}}
       _scheduleTokenRefresh(storedTokens);
+{{/enable_auto_refresh}}
     }
   }
 
@@ -61,12 +70,16 @@ class SessionController {
   Future<void> setSession(TokenPair tokenPair) async {
     await _tokenStorage.saveTokens(tokenPair);
     _updateState(SessionAuthenticated(tokenPair: tokenPair));
+{{#enable_auto_refresh}}
     _scheduleTokenRefresh(tokenPair);
+{{/enable_auto_refresh}}
   }
 
   /// Clear session (logout)
   Future<void> clearSession() async {
+{{#enable_auto_refresh}}
     _cancelRefreshTimer();
+{{/enable_auto_refresh}}
     await _tokenStorage.clearTokens();
     _updateState(const SessionUnauthenticated());
   }
@@ -100,6 +113,13 @@ class SessionController {
     return tokenPair.accessToken;
   }
 
+  /// Manually refresh the current session
+  Future<bool> refreshSession() async {
+    final state = _currentState;
+    if (state is! SessionAuthenticated) return false;
+    return _refreshSession(state.tokenPair);
+  }
+
   /// Refresh the current session
   Future<bool> _refreshSession(TokenPair currentTokens) async {
     _updateState(const SessionRefreshing());
@@ -117,22 +137,24 @@ class SessionController {
 
       await _tokenStorage.saveTokens(newTokens);
       _updateState(SessionAuthenticated(tokenPair: newTokens));
+{{#enable_auto_refresh}}
       _scheduleTokenRefresh(newTokens);
+{{/enable_auto_refresh}}
       return true;
     } catch (e) {
       _updateState(SessionError(e.toString()));
       return false;
     }
   }
+{{#enable_auto_refresh}}
 
   /// Schedule automatic token refresh before expiry
   void _scheduleTokenRefresh(TokenPair tokenPair) {
     _cancelRefreshTimer();
 
-    // Calculate time until refresh needed (refresh 1 minute before expiry)
-    final refreshBuffer = const Duration(minutes: 1);
+    // Calculate time until refresh needed
     final expiresIn = tokenPair.accessTokenExpiresAt.difference(DateTime.now());
-    final refreshIn = expiresIn - refreshBuffer;
+    final refreshIn = expiresIn - _refreshBuffer;
 
     // Don't schedule if already expired or very short time
     if (refreshIn.isNegative || refreshIn.inSeconds < 10) return;
@@ -146,6 +168,7 @@ class SessionController {
     _refreshTimer?.cancel();
     _refreshTimer = null;
   }
+{{/enable_auto_refresh}}
 
   void _updateState(SessionState newState) {
     _currentState = newState;
@@ -153,7 +176,9 @@ class SessionController {
   }
 
   void dispose() {
+{{#enable_auto_refresh}}
     _cancelRefreshTimer();
+{{/enable_auto_refresh}}
     _stateController.close();
   }
 }
