@@ -19,6 +19,7 @@ A collection of production-ready Mason bricks for Flutter development.
 | [**ui_state**](./bricks/ui_state) | Standardized UI state (Idle, Loading, Success, Error, Empty) | `bricks/ui_state` |
 | [**viewmodel_test**](./bricks/viewmodel_test) | Test utilities for Riverpod ViewModels | `bricks/viewmodel_test` |
 | [**localization_controller**](./bricks/localization_controller) | Robust localization with locale persistence and ARB translations | `bricks/localization_controller` |
+| [**radar_chart_widget**](./bricks/radar_chart_widget) | Animated multi-dimensional radar/spider chart with polygon grid & highlights | `bricks/radar_chart_widget` |
 
 ## 🛠️ Usage
 

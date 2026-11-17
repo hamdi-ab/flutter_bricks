@@ -1,0 +1,5 @@
+name: radar_chart_widget
+description: A customizable, animated multi-dimensional radar/spider chart widget with concentric polygon grids, radial gradients, vertex glow dots, and perimeter labels.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev <1.0.0"
